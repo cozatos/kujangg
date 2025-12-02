@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GZ STORE DIGITAL</title>
+    <!-- Memuat Tailwind CSS untuk styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Memuat Font Awesome untuk ikon sosial media -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        /* Menggunakan font Inter untuk tampilan modern */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f9fb; /* Latar belakang default */
+            /* Gaya untuk gambar latar belakang akan ditambahkan oleh JavaScript */
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+        }
+        /* Custom scrollbar untuk elemen yang bisa di-scroll */
+        .custom-scroll::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        .custom-scroll::-webkit-scrollbar-thumb {
+            background-color: #525252; /* Warna abu-abu gelap */
+            border-radius: 4px;
+        }
+        .custom-scroll::-webkit-scrollbar-track {
+            background: #e5e5e5; /* Warna abu-abu sangat muda */
+        }
+        /* Style untuk transisi mulus */
+        .tab-content {
+            transition: opacity 0.3s ease-in-out;
+        }
+        /* Efek hover pada tombol tab */
+        .tab-button:hover {
+            color: #333333;
+        }
+        /* Style untuk tombol tab yang aktif */
+        .active-tab-style {
+            border-bottom-color: #171717; /* Warna hitam untuk border aktif */
+            color: #171717;
+        }
+        /* Gaya spesifik untuk tombol kategori yang aktif */
+        .category-active {
+            background-color: #171717 !important;
+            color: white !important;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+        }
+        /* Gaya untuk modal overlay */
+        .modal-overlay {
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 50; /* Di atas semua konten */
+        }
+        .modal-content {
+            max-height: 90vh;
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-8" id="main-body">
+
+    <div class="max-w-7xl mx-auto bg-white/90 backdrop-blur-sm shadow-2xl rounded-2xl overflow-hidden border border-gray-200">
+        
+        <!-- Header Utama (Hitam) -->
+        <header class="p-6 bg-gray-900 text-white shadow-lg">
+            <h1 class="text-3xl font-bold tracking-tight">PUSAT INFO SELLER</h1>
+            <p class="text-gray-400 mt-1">GZ STORE DIGITAL CHEAP & TRUSTED 100%</p>
+        </header>
+
+        <!-- Navigasi Tab (Gaya Monokrom) -->
+        <nav class="border-b border-gray-300 flex flex-wrap justify-center sm:justify-start bg-white">
+            <!-- Tombol Testimoni -->
+            <button id="tab-testimoni" 
+                    class="tab-button py-4 px-6 text-sm font-medium border-b-2 border-transparent text-gray-600 hover:text-gray-900 transition duration-150 ease-in-out" 
+                    onclick="showTab('testimoni')">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-2-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                TESTIMONI / FEEDBACK
+            </button>
+            
+            <!-- Tombol Produk -->
+            <button id="tab-produk" 
+                    class="tab-button py-4 px-6 text-sm font-medium border-b-2 border-transparent text-gray-600 hover:text-gray-900 transition duration-150 ease-in-out" 
+                    onclick="showTab('produk')">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                </svg>
+                LIST PRODUCT
+            </button>
+
+            <!-- Tombol Seller Info BARU -->
+            <button id="tab-seller" 
+                    class="tab-button py-4 px-6 text-sm font-medium border-b-2 border-transparent text-gray-600 hover:text-gray-900 transition duration-150 ease-in-out" 
+                    onclick="showTab('seller')">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H5a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-5m-7-5h2m-2 0h2m-2 0V9m2 2V9m0 0v2m0-2h2m-2 0h2" />
+                </svg>
+                INFORMASI SELLER
+            </button>
+        </nav>
+
+        <!-- Konten Tab -->
+        <div class="p-4 sm:p-8">
+
+            <!-- 1. Konten Testimoni -->
+            <div id="content-testimoni" class="tab-content">
+                <h2 class="text-2xl font-semibold mb-6 text-gray-800 border-b pb-2">TESTIMONI GZ STORE DIGITAL ( TEKAN IMAGE TU UNTUK MEMPERBESAR )</h2>
+                <div id="testimoni-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 custom-scroll max-h-[80vh] overflow-y-auto p-2 -m-2">
+                    <!-- Kartu gambar akan diisi oleh JavaScript -->
+                </div>
+            </div>
+
+            <!-- 2. Konten Produk BARU (dengan Kategori Filter) -->
+            <div id="content-produk" class="tab-content hidden opacity-0">
+                <h2 class="text-2xl font-semibold mb-4 text-gray-800 border-b pb-2">PRICELIST GZ STORE DIGITAL</h2>
+                
+                <!-- Area Filter Kategori -->
+                <p class="text-sm font-medium text-gray-700 mb-2">SILAHKAN PILIH KATEGORI YANG NAK KALIAN BELI:</p>
+                <div id="category-filter" class="flex flex-wrap gap-2 mb-6 p-3 bg-gray-100 rounded-xl shadow-inner custom-scroll overflow-x-auto">
+                    <!-- Tombol Kategori akan diisi oleh JavaScript -->
+                </div>
+
+                <div id="produk-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 custom-scroll max-h-[70vh] overflow-y-auto p-2 -m-2">
+                    <!-- Kartu produk akan diisi oleh JavaScript -->
+                </div>
+            </div>
+
+            <!-- 3. Konten Seller Info BARU -->
+            <div id="content-seller" class="tab-content hidden opacity-0">
+                <h2 class="text-2xl font-semibold mb-6 text-gray-800 border-b pb-2">INFORMASI SELLER</h2>
+                <div id="seller-info-content" class="max-w-xl mx-auto p-6 bg-gray-100 rounded-xl shadow-xl border border-gray-200">
+                    <!-- Konten akan diisi oleh JavaScript -->
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+    <!-- MODAL DETAIL PRODUK -->
+    <div id="product-modal" class="modal-overlay fixed inset-0 hidden items-center justify-center p-4 transition-opacity duration-300 opacity-0">
+        <div class="modal-content bg-white w-full max-w-lg rounded-xl shadow-2xl overflow-y-auto p-6 relative">
+            
+            <!-- Tombol Tutup -->
+            <button onclick="closeProductDetail()" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+
+            <h3 id="modal-product-name" class="text-3xl font-bold text-gray-900 mb-2 border-b pb-2">Nama Produk</h3>
+            
+            <div class="space-y-4 text-gray-700">
+                <!-- Harga diubah menjadi Ringgit Malaysia (RM) -->
+                <div class="text-4xl font-extrabold text-gray-800" id="modal-product-price">RM 0.00</div>
+                <p class="text-sm text-gray-500">Kategori: <span id="modal-product-category" class="font-medium text-gray-600"></span></p>
+
+                <div class="p-4 rounded-lg border" id="modal-stock-info">
+                    <!-- Informasi Stok di sini -->
+                </div>
+                
+                <h4 class="text-xl font-semibold pt-2 border-t mt-4">DESCRIPTION</h4>
+                <p id="modal-product-description">
+                    PREMIUM QUALITY PRODUCT
+                </p>
+
+                <div class="pt-4 flex justify-end">
+                    <button class="bg-gray-800 text-white py-3 px-6 rounded-lg font-medium hover:bg-gray-900 transition duration-200 shadow-md">
+                        HUBUNGI SELLER DI DISCORD DM SAHAJA
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DETAIL TESTIMONI BARU -->
+    <div id="testimonial-modal" class="modal-overlay fixed inset-0 hidden items-center justify-center p-4 transition-opacity duration-300 opacity-0">
+        <div class="modal-content bg-white w-full max-w-4xl h-auto rounded-xl shadow-2xl overflow-hidden relative">
+            
+            <!-- Tombol Tutup -->
+            <button onclick="closeTestimonialModal()" class="absolute top-4 right-4 text-white hover:text-gray-200 transition bg-gray-800/50 p-2 rounded-full z-10">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            
+            <!-- Konten Gambar Testimoni -->
+            <img id="modal-testimonial-image" 
+                 src="" 
+                 alt="" 
+                 class="w-full h-full object-contain max-h-[85vh]"
+                 onerror="this.onerror=null; this.src='https://placehold.co/800x600/CCCCCC/333333?text=Gambar+Gagal+Dimuat'; this.classList.remove('h-full'); this.classList.add('h-96');"
+            >
+
+            <!-- Keterangan Alt Text -->
+            <div id="modal-testimonial-caption" class="p-3 text-center bg-gray-900 text-white text-sm font-medium">
+                Keterangan Gambar
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        // =========================================================================================
+        // PENGATURAN TAMPILAN DAN DATA (MUDAH DIEDIT)
+        // =========================================================================================
+
+        // 0. PENGATURAN LATAR BELAKANG GAMBAR
+        // Ganti URL di bawah ini dengan link gambar yang Anda inginkan sebagai latar belakang.
+        // URL PLACEHOLDER DIUBAH MENJADI RASIO 1:1 (1080x1080)
+        const backgroundImageUrl = 'https://placehold.co/1080x1080/171717/9ca3af/png?'; 
+        
+        if (backgroundImageUrl) {
+            document.getElementById('main-body').style.backgroundImage = `url('${backgroundImageUrl}')`;
+        }
+
+        // 3. DATA SELLER INFO (BARU)
+        // Ganti informasi di bawah ini sesuai dengan data seller Anda
+        const sellerInfo = {
+            name: "GZ STORE DIGITAL ( HANYA BUKA DI DISCORD, JIKA BUKA DI PLATFORM LAIN ITU FAKE )",
+            slogan: "100% CHEAP & TRUSTED",
+            contact: "TIDAK ADA KONTAK SELAIN DISCORD DM",
+            email: "official@gzstoredigital.my",
+            address: "HANYA VIA ONLINE (DISCORD)",
+            socialMedia: [
+                // Icon menggunakan Font Awesome, format: { name: 'Discord', icon: 'fa-discord', link: '...' }
+                { name: 'Discord Seller', icon: 'fa-discord', link: 'https://discord.com/users/346738914662285313' },
+            ]
+        };
+
+
+        // 1. DATA TESTIMONI (50 ITEM)
+        // URL PLACEHOLDER LAMA DIGANTI DENGAN FILE UPLOAD BARU DARI PENGGUNA
+        const testimonialImagesInitial = [ // Diubah namanya menjadi testimonialImagesInitial
+            { id: 1, url: 'uploaded:testimonigzstoredigital.png', alt: 'Testimoni 1: Server Boost 14x 1 Bulan (Ignore JUNGLE)' },
+            { id: 2, url: 'uploaded:testimonigzstoredigital_1.png', alt: 'Testimoni 2: 1x Deco Profile (Arin)' },
+            { id: 3, url: 'uploaded:testimonigzstoredigital_2.png', alt: 'Testimoni 3: Nitro Boost 3 Bulan ALL USER (Dpr)' },
+            { id: 4, url: 'uploaded:testimonigzstoredigital_3.png', alt: 'Testimoni 4: Netflix Premium 1P1U 4K UHD (ryuu)' },
+            { id: 5, url: 'uploaded:testimonigzstoredigital_4.png', alt: 'Testimoni 5: 1x Deco Profile Bundle (FLORIE)' },
+            { id: 6, url: 'uploaded:testimonigzstoredigital_5.png', alt: 'Testimoni 6: Nitro Boost 3 Bulan NEW USER (FLORIE)' },
+            { id: 7, url: 'uploaded:testimonigzstoredigital_6.png', alt: 'Testimoni 7: Nitro Boost 3 Bulan NEW USER (Saya Intel)' },
+            { id: 8, url: 'uploaded:testimonigzstoredigital_7.png', alt: 'Testimoni 8: Server Boost 14x 1 Bulan (mijiane)' },
+            { id: 9, url: 'uploaded:testimonigzstoredigital_8.png', alt: 'Testimoni 9: 2x Deco Profile (FLORIE)' },
+            { id: 10, url: 'uploaded:testimonigzstoredigital_9.png', alt: 'Testimoni 10: Nitro Boost 3 Bulan NEW USER (nathan)' },
+            { id: 11, url: 'uploaded:testimonigzstoredigital_10.png', alt: 'Testimoni 11: Server Boost 14x 1 Bulan (prince bou)' },
+            { id: 12, url: 'uploaded:testimonigzstoredigital_12.png', alt: 'Testimoni 12: Nitro Boost 3 Bulan NEW USER (nathan)' },
+            { id: 13, url: 'uploaded:testimonigzstoredigital_13.png', alt: 'Testimoni 13: 1x Decor Bundle Yunara Aion Erna (nathan)' },
+            { id: 14, url: 'uploaded:testimonigzstoredigital_14.png', alt: 'Testimoni 14: 3x Decor Profile (nathan)' },
+            { id: 15, url: 'uploaded:testimonigzstoredigital_15.png', alt: 'Testimoni 15: 1x Decoration Profile Dewdrop (jhealss)' },
+            { id: 16, url: 'uploaded:testimonigzstoredigital_16.png', alt: 'Testimoni 16: YouTube Premium 1 Bulan Famhead (Ryaaann)' },
+            { id: 17, url: 'uploaded:testimonigzstoredigital_17.png', alt: 'Testimoni 17: Netflix Premium 1P1U 1 Bulan (lepi)' },
+            { id: 18, url: 'uploaded:testimonigzstoredigital_18.png', alt: 'Testimoni 18: Netflix Premium 1P1U 1 Bulan (lepi)' },
+            { id: 19, url: 'uploaded:testimonigzstoredigital_21.png', alt: 'Testimoni 19: Server Boost 22x 1 Bulan (jemii)' },
+            { id: 20, url: 'uploaded:testimonigzstoredigital_22.png', alt: 'Testimoni 20: Nitro Activated (Arvhy)' },
+            { id: 21, url: 'uploaded:testimonigzstoredigital_23.png', alt: 'Testimoni 21: 1000 Robux + Premium Instant (ASELLVN)' },
+            { id: 22, url: 'uploaded:testimonigzstoredigital_24.png', alt: 'Testimoni 22: 1x Deco Profile (Kiirei)' },
+            { id: 23, url: 'uploaded:testimonigzstoredigital_25.png', alt: 'Testimoni 23: Netflix Premium 1P2U Sharing 4K (Rannn)' },
+            { id: 24, url: 'uploaded:testimonigzstoredigital_26.png', alt: 'Testimoni 24: Nitro Boost 3 Bulan via Login (Vincentzius)' },
+            { id: 25, url: 'uploaded:testimonigzstoredigital_27.png', alt: 'Testimoni 25: Capcut Private 1 Bulan (Kartein)' },
+            { id: 26, url: 'uploaded:testimonigzstoredigital_28.png', alt: 'Testimoni 26: SV Boost 14x 1 Bulan (Ghiyas curukuk)' },
+            { id: 27, url: 'uploaded:testimonigzstoredigital_29.png', alt: 'Testimoni 27: 1x Deco Profile (Regan ravnras)' },
+            { id: 28, url: 'uploaded:testimonigzstoredigital_30.png', alt: 'Testimoni 28: 80 Robux Instant via Login (Senn)' },
+            { id: 29, url: 'uploaded:testimonigzstoredigital_31.png', alt: 'Testimoni 29: 2x Deco Profile (Arvhy)' },
+            { id: 30, url: 'uploaded:testimonigzstoredigital_32.png', alt: 'Testimoni 30: 240 Robux Instant via Login (Senn)' },
+            { id: 31, url: 'uploaded:testimonigzstoredigital_33.png', alt: 'Testimoni 31: Nitro Boost 3 Bulan NEW USER (beys)' },
+            { id: 32, url: 'uploaded:testimonigzstoredigital_34.png', alt: 'Testimoni 32: 500 Robux Instant via Login (aurelala)' },
+            { id: 33, url: 'uploaded:testimonigzstoredigital_35.png', alt: 'Testimoni 33: After Server Boost 14x 1 Bulan (mijiane)' },
+            { id: 34, url: 'uploaded:testimonigzstoredigital_36.png', alt: 'Testimoni 34: 80 Robux Instant via Login (GOD_SERSI)' },
+            { id: 35, url: 'uploaded:testimonigzstoredigital_37.png', alt: 'Testimoni 35: Netflix Semi Private 1 Bulan 2 Device (Ghiyas)' },
+            { id: 36, url: 'uploaded:testimonigzstoredigital_38.png', alt: 'Testimoni 36: Nitro Boost 3 Bulan ALL USER (rapldokja)' },
+            { id: 37, url: 'uploaded:testimonigzstoredigital_39.png', alt: 'Testimoni 37: 160 Robux Instant via Login (Renz)' },
+            { id: 38, url: 'uploaded:testimonigzstoredigital_40.png', alt: 'Testimoni 38: 3x Deco Profile (aditwinter)' },
+            { id: 39, url: 'uploaded:testimonigzstoredigital_41.png', alt: 'Testimoni 39: After Server Boost 14x 1 Bulan (mmaklu)' },
+            { id: 40, url: 'uploaded:testimonigzstoredigital_42.png', alt: 'Testimoni 40: 1000 Robux + Premium Instant (Arvhy)' },
+            { id: 41, url: 'uploaded:testimonigzstoredigital_43.png', alt: 'Testimoni 41: Nitro Boost 3 Bulan NEW USER (Xin)' },
+            { id: 42, url: 'uploaded:testimonigzstoredigital_44.png', alt: 'Testimoni 42: 6x Deco Profile (michasy)' },
+            { id: 43, url: 'uploaded:testimonigzstoredigital_45.png', alt: 'Testimoni 43: 6x Deco Profile (michasy)' },
+            { id: 44, url: 'uploaded:testimonigzstoredigital_46.png', alt: 'Testimoni 44: 2x Deco Profile (Arin)' },
+            { id: 45, url: 'uploaded:testimonigzstoredigital_47.png', alt: 'Testimoni 45: 2x Deco Profile (yelji)' },
+            { id: 46, url: 'uploaded:testimonigzstoredigital_48.png', alt: 'Testimoni 46: Nitro Boost 3 Bulan ALL USER (nathan)' },
+            { id: 47, url: 'uploaded:testimonigzstoredigital_49.png', alt: 'Testimoni 47: YouTube Premium via Invite 1 Bulan (Lindeman)' },
+            { id: 48, url: 'uploaded:testimonigzstoredigital_50.png', alt: 'Testimoni 48: SV Boost 20x 1 Bulan (ketZ)' },
+            { id: 49, url: 'uploaded:testimonigzstoredigital_19.png', alt: 'Testimoni 49: Produk Placeholder (Tidak ada file 19)' }, // Dummy untuk genap
+            { id: 50, url: 'uploaded:testimonigzstoredigital_20.png', alt: 'Testimoni 50: Produk Placeholder (Tidak ada file 20)' }, // Dummy untuk genap
+        ];
+
+        // Memastikan 50 item terisi dengan data yang ada:
+        const uploadedFileNames = [
+            'testimoni/testimonigzstoredigital.png', 'testimoni/testimonigzstoredigital_1.png', 'testimoni/testimonigzstoredigital_2.png',
+            'testimoni/testimonigzstoredigital_3.png', 'testimoni/testimonigzstoredigital_4.png', 'testimoni/testimonigzstoredigital_5.png',
+            'testimoni/testimonigzstoredigital_6.png', 'testimoni/testimonigzstoredigital_7.png', 'testimoni/testimonigzstoredigital_8.png',
+            'testimoni/testimonigzstoredigital_9.png', 'testimoni/testimonigzstoredigital_10.png', 'testimoni/testimonigzstoredigital_12.png',
+            'testimoni/testimonigzstoredigital_13.png', 'testimoni/testimonigzstoredigital_14.png', 'testimoni/testimonigzstoredigital_15.png',
+            'testimoni/testimonigzstoredigital_16.png', 'testimoni/testimonigzstoredigital_17.png', 'testimoni/testimonigzstoredigital_18.png',
+            'testimoni/testimonigzstoredigital_21.png', 'testimoni/testimonigzstoredigital_22.png', 'testimoni/testimonigzstoredigital_23.png',
+            'testimoni/testimonigzstoredigital_24.png', 'testimoni/testimonigzstoredigital_25.png', 'testimoni/testimonigzstoredigital_26.png',
+            'testimoni/testimonigzstoredigital_27.png', 'testimoni/testimonigzstoredigital_28.png', 'testimoni/testimonigzstoredigital_29.png',
+            'testimoni/testimonigzstoredigital_30.png', 'testimoni/testimonigzstoredigital_31.png', 'testimoni/testimonigzstoredigital_32.png',
+            'testimoni/testimonigzstoredigital_33.png', 'testimoni/testimonigzstoredigital_34.png', 'testimoni/testimonigzstoredigital_35.png',
+            'testimoni/testimonigzstoredigital_36.png', 'testimoni/testimonigzstoredigital_37.png', 'testimoni/testimonigzstoredigital_38.png',
+            'testimoni/testimonigzstoredigital_39.png', 'testimoni/testimonigzstoredigital_40.png', 'testimoni/testimonigzstoredigital_41.png',
+            'testimoni/testimonigzstoredigital_42.png', 'testimoni/testimonigzstoredigital_43.png', 'testimoni/testimonigzstoredigital_44.png',
+            'testimoni/testimonigzstoredigital_45.png', 'testimoni/testimonigzstoredigital_46.png', 'testimoni/testimonigzstoredigital_47.png',
+            'testimoni/testimonigzstoredigital_48.png', 'testimoni/testimonigzstoredigital_49.png', 'testimoni/testimonigzstoredigital_50.png',
+        ];
+
+        // Ini adalah daftar 50 item yang akan digunakan. File yang tidak terunggah (misal: file 11, 19, 20) akan diisi dengan file duplikat agar totalnya tetap 50.
+        const fileMap = {
+            1: uploadedFileNames[0], 2: uploadedFileNames[1], 3: uploadedFileNames[2], 4: uploadedFileNames[3], 5: uploadedFileNames[4],
+            6: uploadedFileNames[5], 7: uploadedFileNames[6], 8: uploadedFileNames[7], 9: uploadedFileNames[8], 10: uploadedFileNames[9],
+            11: 'https://placehold.co/400x300/171717/FFFFFF?text=Testimoni+11+HILANG', // File 11 hilang, pakai dummy
+            12: uploadedFileNames[10], 13: uploadedFileNames[11], 14: uploadedFileNames[12], 15: uploadedFileNames[13], 16: uploadedFileNames[14],
+            17: uploadedFileNames[15], 18: uploadedFileNames[16], 19: 'https://placehold.co/400x300/171717/FFFFFF?text=Testimoni+19+HILANG', // File 19 hilang, pakai dummy
+            20: 'https://placehold.co/400x300/171717/FFFFFF?text=Testimoni+20+HILANG', // File 20 hilang, pakai dummy
+            21: uploadedFileNames[17], 22: uploadedFileNames[18], 23: uploadedFileNames[19], 24: uploadedFileNames[20], 25: uploadedFileNames[21],
+            26: uploadedFileNames[22], 27: uploadedFileNames[23], 28: uploadedFileNames[24], 29: uploadedFileNames[25], 30: uploadedFileNames[26],
+            31: uploadedFileNames[27], 32: uploadedFileNames[28], 33: uploadedFileNames[29], 34: uploadedFileNames[30], 35: uploadedFileNames[31],
+            36: uploadedFileNames[32], 37: uploadedFileNames[33], 38: uploadedFileNames[34], 39: uploadedFileNames[35], 40: uploadedFileNames[36],
+            41: uploadedFileNames[37], 42: uploadedFileNames[38], 43: uploadedFileNames[39], 44: uploadedFileNames[40], 45: uploadedFileNames[41],
+            46: uploadedFileNames[42], 47: uploadedFileNames[43], 48: uploadedFileNames[44], 49: uploadedFileNames[45], 50: uploadedFileNames[46],
+        };
+
+        // Ganti deklarasi testimonialImagesFinal menjadi definisi variabel testimonialImages di akhir
+        let testimonialImages = []; // Menggunakan let untuk definisi akhir
+        for (let i = 1; i <= 50; i++) {
+            const uploadedUrl = fileMap[i];
+            let altText = `Testimoni GZ Store Digital #${i}`;
+
+            // Mengambil alt text dari data awal jika URL adalah file yang diupload,
+            // jika tidak (dummy) biarkan seperti di atas.
+            if (uploadedUrl.startsWith('uploaded:')) {
+                 const oldItem = testimonialImagesInitial.find(item => item.id === i);
+                 if (oldItem) {
+                    altText = oldItem.alt;
+                 } else {
+                     // Mencoba mencocokkan nama file ke alt text yang lebih deskriptif
+                    switch (i) {
+                        case 1: altText = 'Server Boost 14x 1 Bulan (Ignore JUNGLE)'; break;
+                        case 2: altText = '1x Deco Profile (Arin)'; break;
+                        case 3: altText = 'Nitro Boost 3 Bulan ALL USER (Dpr)'; break;
+                        case 4: altText = 'Netflix Premium 1P1U 4K UHD (ryuu)'; break;
+                        case 5: altText = '1x Deco Profile Bundle (FLORIE)'; break;
+                        case 6: altText = 'Nitro Boost 3 Bulan NEW USER (FLORIE)'; break;
+                        case 7: altText = 'Nitro Boost 3 Bulan NEW USER (Saya Intel)'; break;
+                        case 8: altText = 'Server Boost 14x 1 Bulan (mijiane)'; break;
+                        case 9: altText = '2x Deco Profile (FLORIE)'; break;
+                        case 10: altText = 'Nitro Boost 3 Bulan NEW USER (nathan)'; break;
+                        case 12: altText = 'Nitro Boost 3 Bulan NEW USER (nathan)'; break;
+                        case 13: altText = '1x Decor Bundle Yunara Aion Erna (nathan)'; break;
+                        case 14: altText = '3x Decor Profile (nathan)'; break;
+                        case 15: altText = '1x Decoration Profile Dewdrop (jhealss)'; break;
+                        case 16: altText = 'YouTube Premium 1 Bulan Famhead (Ryaaann)'; break;
+                        case 17: altText = 'Netflix Premium 1P1U 1 Bulan (lepi)'; break;
+                        case 18: altText = 'Netflix Premium 1P1U 1 Bulan (lepi)'; break;
+                        case 19: altText = 'Server Boost 22x 1 Bulan (jemii)'; break;
+                        case 20: altText = 'Nitro Activated (Arvhy)'; break;
+                        case 21: altText = '1000 Robux + Premium Instant (ASELLVN)'; break;
+                        case 22: altText = '1x Deco Profile (Kiirei)'; break;
+                        case 23: altText = 'Netflix Premium 1P2U Sharing 4K (Rannn)'; break;
+                        case 24: altText = 'Nitro Boost 3 Bulan via Login (Vincentzius)'; break;
+                        case 25: altText = 'Capcut Private 1 Bulan (Kartein)'; break;
+                        case 26: altText = 'SV Boost 14x 1 Bulan (Ghiyas curukuk)'; break;
+                        case 27: altText = '1x Deco Profile (Regan ravnras)'; break;
+                        case 28: altText = '80 Robux Instant via Login (Senn)'; break;
+                        case 29: altText = '2x Deco Profile (Arvhy)'; break;
+                        case 30: altText = '240 Robux Instant via Login (Senn)'; break;
+                        case 31: altText = 'Nitro Boost 3 Bulan NEW USER (beys)'; break;
+                        case 32: altText = '500 Robux Instant via Login (aurelala)'; break;
+                        case 33: altText = 'After Server Boost 14x 1 Bulan (mijiane)'; break;
+                        case 34: altText = '80 Robux Instant via Login (GOD_SERSI)'; break;
+                        case 35: altText = 'Netflix Semi Private 1 Bulan 2 Device (Ghiyas)'; break;
+                        case 36: altText = 'Nitro Boost 3 Bulan ALL USER (rapldokja)'; break;
+                        case 37: altText = '160 Robux Instant via Login (Renz)'; break;
+                        case 38: altText = '3x Deco Profile (aditwinter)'; break;
+                        case 39: altText = 'After Server Boost 14x 1 Bulan (mmaklu)'; break;
+                        case 40: altText = '1000 Robux + Premium Instant (Arvhy)'; break;
+                        case 41: altText = 'Nitro Boost 3 Bulan NEW USER (Xin)'; break;
+                        case 42: altText = '6x Deco Profile (michasy)'; break;
+                        case 43: altText = '6x Deco Profile (michasy)'; break;
+                        case 44: altText = '2x Deco Profile (Arin)'; break;
+                        case 45: altText = '2x Deco Profile (yelji)'; break;
+                        case 46: altText = 'Nitro Boost 3 Bulan ALL USER (nathan)'; break;
+                        case 47: altText = 'YouTube Premium via Invite 1 Bulan (Lindeman)'; break;
+                        case 48: altText = 'SV Boost 20x 1 Bulan (ketZ)'; break;
+                        case 49: altText = 'Produk Placeholder (Tidak ada file 19)'; break;
+                        case 50: altText = 'Produk Placeholder (Tidak ada file 20)'; break;
+                        default: altText = `Testimoni GZ Store Digital #${i}`;
+                    }
+                 }
+            }
+
+
+            testimonialImages.push({
+                id: i,
+                url: uploadedUrl,
+                alt: altText
+            });
+        }
+        
+        // Hapus deklarasi const testimonialImagesInitial dan testimonialImagesFinal yang tidak diperlukan lagi
+
+        // 2. DATA PRODUK (20 KATEGORI X 20 PRODUK = 400 ITEM)
+        // SILAKAN GANTI NAMA KATEGORI, NAMA PRODUK, HARGA, DAN STOK DI BAWAH INI.
+        
+        const productCategories = [
+            {
+                id: 1,
+                name: 'DISCORD PRODUCT',
+                products: [
+                    { id: 1, name: 'NITRO BOOST GIFT 1 MONTH', price: 17, stock: 10 },
+                    { id: 2, name: 'NITRO BOOST GIFT 1 YEAR', price: 90, stock: 5 },
+                    { id: 3, name: 'SERVER BOOST 14X 1 MONTH', price: 20, stock: 28 },
+                    { id: 4, name: 'SERVER BOOST 14X 3 MONTH', price: 40, stock: 48 },
+                    { id: 5, name: 'DECORATION PROFILE ( PRODUK TANYAKAN DALAM DM JE )', price: 0, stock: 0 },
+                    { id: 6, name: 'CUSTOM BOT DISCORD FULL', price: 30, stock: 10 },
+                ]
+            },
+            {
+                id: 2,
+                name: 'ROBUX VIA LOGIN CHEAP',
+                products: [
+                    { id: 21, name: '500 ROBUX', price: 20, stock: 20000 },
+                    { id: 22, name: '1000 ROBUX', price: 30, stock: 20000 },
+                    { id: 23, name: '2000 ROBUX', price: 55, stock: 20000 },
+                    { id: 24, name: '3000 ROBUX', price: 85, stock: 20000 },
+                    { id: 25, name: '450 ROBUX + PREMIUM', price: 20, stock: 20000 },
+                    { id: 26, name: '1000 ROBUX + PREMIUM', price: 30, stock: 20000 },
+                ]
+            },
+            {
+                id: 3,
+                name: 'ROBUX VIA GAMEPASS AFTER TAX DELAY 5 HARI',
+                products: [
+                    { id: 41, name: '1000 ROBUX', price: 25, stock: 2000 },
+                    { id: 42, name: '2000 ROBUX', price: 48, stock: 2000 },
+                ]
+            },
+            {
+                id: 4,
+                name: 'KORBLOX',
+                products: [
+                    { id: 61, name: 'KORBLOX DEATHSPEAKER', price: 190, stock: 1 },
+                ]
+            },
+            {
+                id: 5,
+                name: 'LIMITED ITEM',
+                products: [
+                    { id: 81, name: '8-BIT ROYAL CROWN', price: 320, stock: 2 },
+                    { id: 82, name: '8-BIT HP BAR', price: 150, stock: 3 },
+                    { id: 83, name: '8-BIT TABBY CAT', price: 140, stock: 1 },
+                    { id: 84, name: '8-BIT EXTRA LIFE', price: 140, stock: 1 },
+                    { id: 85, name: '8-BIT RBL Coin', price: 140, stock: 3 },
+                ]
+            },
+            
+        ];
+        
+        // Panggil fungsi untuk menghasilkan data saat skrip dimuat (TETAP DIBAWAH DATA)
+        let activeCategoryId = 1; // Default menampilkan kategori pertama
+
+
+        // =========================================================================================
+        // FUNGSI RENDER DAN NAVIGASI
+        // =========================================================================================
+
+        /**
+         * Menampilkan Modal Detail Produk dengan data yang diberikan.
+         * @param {number} productId - ID Produk yang akan ditampilkan
+         */
+        function showProductDetail(productId) {
+            // Cari kategori aktif saat ini
+            const activeCategory = productCategories.find(cat => cat.id === activeCategoryId);
+            if (!activeCategory) return;
+            
+            // Cari produk berdasarkan ID di kategori aktif
+            const product = activeCategory.products.find(p => p.id === productId);
+
+            if (!product) {
+                console.error("Produk tidak ditemukan dengan ID:", productId);
+                return;
+            }
+
+            // --- Format mata uang ke Ringgit Malaysia (MYR) ---
+            const formattedPrice = product.price.toLocaleString('ms-MY', { style: 'currency', currency: 'MYR' });
+
+            // Logika Stok untuk Modal
+            let stockHtml;
+            const stockColorClass = product.stock > 20 ? 'bg-green-100 text-green-700' :
+                                    product.stock > 5 && product.stock <= 20 ? 'bg-yellow-100 text-yellow-700' :
+                                    product.stock > 0 ? 'bg-red-100 text-red-700' :
+                                    'bg-gray-200 text-gray-600';
+
+            if (product.stock > 0) {
+                stockHtml = `<p class="font-bold">Status: Tersedia</p>
+                             <p class="mt-1">Stok Saat Ini: ${product.stock} unit</p>`;
+            } else {
+                stockHtml = `<p class="font-bold text-lg">Status: HABIS</p>
+                             <p class="mt-1">Produk ini sedang tidak tersedia. Silakan hubungi kami untuk pre-order.</p>`;
+            }
+            
+            // Isi Konten Modal
+            document.getElementById('modal-product-name').innerText = product.name;
+            document.getElementById('modal-product-price').innerText = formattedPrice;
+            document.getElementById('modal-product-category').innerText = activeCategory.name;
+            document.getElementById('modal-stock-info').innerHTML = stockHtml;
+            document.getElementById('modal-stock-info').className = `p-4 rounded-lg border ${stockColorClass}`;
+            
+            // Tampilkan Modal
+            const modal = document.getElementById('product-modal');
+            modal.classList.remove('hidden', 'opacity-0');
+            modal.classList.add('flex'); // Tampilkan dengan Flex
+            setTimeout(() => {
+                modal.classList.add('opacity-100'); // Mulai transisi
+            }, 10);
+        }
+
+        /**
+         * Menyembunyikan Modal Detail Produk
+         */
+        function closeProductDetail() {
+            const modal = document.getElementById('product-modal');
+            modal.classList.remove('opacity-100');
+            modal.classList.add('opacity-0');
+            setTimeout(() => {
+                modal.classList.add('hidden'); // Sembunyikan setelah transisi selesai
+                modal.classList.remove('flex');
+            }, 300);
+        }
+
+        // FUNGSI MODAL TESTIMONI BARU
+        /**
+         * Menampilkan Modal Gambar Testimoni saat diklik.
+         * @param {string} imageUrl - URL gambar yang akan ditampilkan
+         * @param {string} altText - Teks deskripsi gambar
+         */
+        function showTestimonialModal(imageUrl, altText) {
+            const modal = document.getElementById('testimonial-modal');
+            
+            document.getElementById('modal-testimonial-image').src = imageUrl;
+            document.getElementById('modal-testimonial-image').alt = altText;
+            document.getElementById('modal-testimonial-caption').innerText = altText;
+
+            modal.classList.remove('hidden', 'opacity-0');
+            modal.classList.add('flex');
+            setTimeout(() => {
+                modal.classList.add('opacity-100');
+            }, 10);
+        }
+
+        /**
+         * Menyembunyikan Modal Gambar Testimoni
+         */
+        function closeTestimonialModal() {
+            const modal = document.getElementById('testimonial-modal');
+            modal.classList.remove('opacity-100');
+            modal.classList.add('opacity-0');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }, 300);
+        }
+
+
+        // Fungsi untuk merender Tombol Kategori
+        function renderCategoryButtons() {
+            const filterContainer = document.getElementById('category-filter');
+            let html = '';
+            productCategories.forEach(category => {
+                const isActive = category.id === activeCategoryId;
+                const activeClass = isActive ? 'category-active' : 'bg-white hover:bg-gray-200 border border-gray-300 text-gray-700';
+                
+                html += `
+                    <button 
+                        class="px-4 py-2 text-sm font-medium rounded-lg transition duration-200 shadow-sm whitespace-nowrap ${activeClass}" 
+                        onclick="selectCategory(${category.id})">
+                        ${category.name} (${category.products.length})
+                    </button>
+                `;
+            });
+            filterContainer.innerHTML = html;
+        }
+
+        // Fungsi untuk memilih dan menampilkan produk dari kategori tertentu
+        function selectCategory(categoryId) {
+            activeCategoryId = categoryId;
+            renderCategoryButtons(); // Update tampilan tombol
+            renderProducts(categoryId); // Render produk kategori yang dipilih
+        }
+
+        // Fungsi untuk merender Testimoni (DIUPDATE: Tambah onclick untuk modal)
+        function renderTestimonials() {
+            const grid = document.getElementById('testimoni-grid');
+            let html = '';
+            testimonialImages.forEach(item => {
+                // Menambahkan onclick event handler ke div container
+                html += `
+                    <div class="relative group overflow-hidden rounded-xl shadow-md transform hover:scale-[1.02] transition duration-300 ease-in-out cursor-pointer border border-gray-300"
+                         onclick="showTestimonialModal('${item.url}', '${item.alt}')">
+                        <!-- URL Gambar Testimoni ada di sini -->
+                        <img 
+                            src="${item.url}" 
+                            alt="${item.alt}" 
+                            class="w-full h-48 object-cover object-center group-hover:opacity-80 transition duration-300 filter grayscale hover:grayscale-0"
+                            onerror="this.onerror=null; this.src='https://placehold.co/400x300/CCCCCC/333333?text=Gagal+Memuat';"
+                        >
+                        <div class="absolute inset-0 bg-gray-900 bg-opacity-40 flex items-end p-3 opacity-0 group-hover:opacity-100 transition duration-300">
+                            <p class="text-white text-xs font-medium">${item.alt}</p>
+                        </div>
+                    </div>
+                `;
+            });
+            grid.innerHTML = html;
+        }
+
+        // Fungsi untuk merender Produk (Hanya 20 produk dari kategori yang dipilih)
+        function renderProducts(categoryId) {
+            const grid = document.getElementById('produk-grid');
+            const selectedCategory = productCategories.find(cat => cat.id === categoryId);
+            
+            if (!selectedCategory) {
+                grid.innerHTML = '<p class="text-gray-500">Kategori tidak ditemukan.</p>';
+                return;
+            }
+
+            let html = '';
+            selectedCategory.products.forEach(product => {
+                // --- Format mata uang ke Ringgit Malaysia (MYR) ---
+                const formattedPrice = product.price.toLocaleString('ms-MY', { style: 'currency', currency: 'MYR' });
+                
+                // Logika warna stok
+                const stockColor = product.stock > 20 ? 'bg-gray-400 text-white' : // Stok aman (Abu-abu gelap)
+                                 product.stock > 5 && product.stock <= 20 ? 'bg-yellow-400 text-gray-800' : // Stok sedang (Kuning)
+                                 product.stock > 0 ? 'bg-red-400 text-white' : // Stok kritis (Merah)
+                                 'bg-gray-600 text-white'; // Stok habis (Abu-abu sangat gelap)
+
+                const statusText = product.stock > 0 ? 'Tersedia' : 'Habis';
+                const statusColor = product.stock > 0 ? 'text-gray-800' : 'text-gray-500';
+
+                // Elemen stok yang baru (dipindahkan)
+                const stockElement = `
+                    <p class="flex items-center">
+                        <span class="font-medium w-16">Stok:</span> 
+                        <span class="text-xs font-medium px-2 py-0.5 rounded ${stockColor} whitespace-nowrap">
+                            ${product.stock} PCS
+                        </span>
+                    </p>
+                `;
+
+                html += `
+                    <div class="bg-gray-100 border border-gray-300 p-5 rounded-xl shadow-lg hover:shadow-xl transition duration-300">
+                        
+                        <!-- Judul Produk (Tidak terpotong, font lebih besar) -->
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">${product.name}</h3>
+                        
+                        <!-- Harga Produk (Font lebih besar) -->
+                        <p class="text-3xl font-extrabold text-gray-800 mt-1">${formattedPrice}</p>
+                        
+                        <div class="mt-4 space-y-2 text-sm text-gray-600">
+                            ${stockElement} <!-- Stok dipindahkan ke sini -->
+                            <p class="flex items-center">
+                                <span class="font-medium w-16">ID:</span> ${product.id}
+                            </p>
+                            <p class="flex items-center">
+                                <span class="font-medium w-16">Status:</span> 
+                                <span class="font-bold ${statusColor}">
+                                    ${statusText}
+                                </span>
+                            </p>
+                        </div>
+
+                        <!-- BUTTON DENGAN FUNGSI BARU -->
+                        <button class="mt-5 w-full bg-gray-800 text-white py-2 rounded-lg font-medium hover:bg-gray-900 transition duration-200 shadow-md"
+                                onclick="showProductDetail(${product.id})">
+                            Lihat Detail
+                        </button>
+                    </div>
+                `;
+            });
+            grid.innerHTML = html;
+        }
+
+        // Fungsi untuk merender Informasi Seller (BARU)
+        function renderSellerInfo() {
+            const container = document.getElementById('seller-info-content');
+            
+            // Rendering daftar media sosial
+            let socialHtml = sellerInfo.socialMedia.map(item => {
+                const iconClass = item.icon || 'fa-globe'; // Fallback icon
+                
+                // Menentukan class ikon untuk fa-brands (fab) atau fa-solid (fas)
+                const iconType = item.icon.startsWith('fa-shopping') || item.icon.startsWith('fa-map') || item.icon.startsWith('fa-phone') || item.icon.startsWith('fa-envelope') ? 'fas' : 'fab';
+
+                return `
+                    <a href="${item.link}" target="_blank" class="flex items-center space-x-3 p-3 rounded-lg bg-white border border-gray-300 hover:bg-gray-200 transition duration-150">
+                        <i class="${iconType} ${iconClass} text-2xl text-gray-700 w-6 text-center"></i>
+                        <span class="font-medium text-gray-800">${item.name}</span>
+                    </a>
+                `;
+            }).join('');
+
+            const html = `
+                <h3 class="text-2xl font-bold text-gray-900">${sellerInfo.name}</h3>
+                <p class="text-gray-600 italic mb-6">"${sellerInfo.slogan}"</p>
+
+                <div class="space-y-3 mb-8 border-b pb-4">
+                    <h4 class="text-lg font-semibold text-gray-800">Kontak Utama:</h4>
+                    <div class="flex items-center space-x-3">
+                        <i class="fas fa-phone-alt text-gray-700 w-6 text-center"></i>
+                        <span class="font-medium">${sellerInfo.contact}</span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <i class="fas fa-envelope text-gray-700 w-6 text-center"></i>
+                        <span class="font-medium">${sellerInfo.email}</span>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <i class="fas fa-map-marker-alt text-gray-700 pt-1 w-6 text-center"></i>
+                        <span class="font-medium">${sellerInfo.address}</span>
+                    </div>
+                </div>
+
+                <h4 class="text-xl font-semibold mb-3 pt-2 text-gray-800">CALL SELLER ( HANYA DI DM DISCORD )</h4>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    ${socialHtml}
+                </div>
+            `;
+            container.innerHTML = html;
+        }
+
+
+        // Fungsi untuk mengelola tampilan Tab
+        function showTab(tabName) {
+            // Sembunyikan semua konten
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.add('hidden', 'opacity-0');
+                content.classList.remove('opacity-100');
+            });
+
+            // Nonaktifkan semua tombol tab
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.remove('active-tab-style');
+                button.classList.add('text-gray-600', 'border-transparent');
+            });
+
+            // Tampilkan konten yang dipilih
+            const selectedContent = document.getElementById(`content-${tabName}`);
+            selectedContent.classList.remove('hidden');
+            // Menambahkan delay untuk transisi opacity
+            setTimeout(() => {
+                selectedContent.classList.add('opacity-100');
+                selectedContent.classList.remove('opacity-0');
+            }, 10);
+
+            // Aktifkan tombol tab yang dipilih
+            const selectedButton = document.getElementById(`tab-${tabName}`);
+            selectedButton.classList.add('active-tab-style');
+            selectedButton.classList.remove('text-gray-600', 'border-transparent');
+        }
+
+        // Inisialisasi: Panggil fungsi render dan tampilkan tab default
+        document.addEventListener('DOMContentLoaded', () => {
+            renderTestimonials();
+            renderCategoryButtons(); // Render tombol kategori saat awal
+            renderProducts(activeCategoryId); // Tampilkan produk dari kategori pertama
+            renderSellerInfo(); // Render konten seller info
+            showTab('testimoni'); // Tampilkan tab Testimoni saat pertama kali dimuat
+            
+            // Tambahkan event listener untuk menutup modal saat klik di luar area modal produk
+            document.getElementById('product-modal').addEventListener('click', function(event) {
+                if (event.target === this) {
+                    closeProductDetail();
+                }
+            });
+
+            // Tambahkan event listener untuk menutup modal saat klik di luar area modal testimoni
+            document.getElementById('testimonial-modal').addEventListener('click', function(event) {
+                if (event.target === this) {
+                    closeTestimonialModal();
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
